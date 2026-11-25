@@ -96,6 +96,7 @@ def make_materials():
         "s": pbr_material("Stone", "#9e9883", roughness=0.85),
         "t": pbr_material("Moss", "#6f8558", roughness=0.9),
         "w": pbr_material("Brick", "#6b4d3d", roughness=0.9),
+        "g": pbr_material("GemStone", "##E0115F", metallic=0.5, roughness=0.2),
     })
 
 
@@ -191,12 +192,22 @@ def build_wall(bm):
         wwww
         """] * 3)
 
+def build_food(bm):
+    voxels(bm, ["""
+        .g..
+        ggg.
+        ggg.
+        .g..
+        """])
+
+
 
 PIECES = {  # the dragon kit; the game finds each mesh by these names
     "head": build_head,
     "straight": build_straight,
     "turn": build_turn,
     "tail": build_tail,
+    "food": build_food,
 }
 TILES = {  # one entry per kind in core/board.gd's TILES; a new kind is one builder and one line
     "floor": build_floor,

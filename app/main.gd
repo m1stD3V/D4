@@ -16,13 +16,21 @@ var session := Session.new(GRID)
 var meshes := {}  # kit piece name -> Mesh, shared by everything that shows it (Flyweight)
 var segments: Array[MeshInstance3D] = []
 var camera := Camera3D.new()
+var food := MeshInstance3D.new()
 var _clock := 0.0
 
 
 func _ready() -> void:
 	meshes = Stage.load_kit()
 	_build_stage()
+	ready_food()
 	_draw_dragon()
+
+
+func ready_food() -> void:
+	add_child(food)
+	food.mesh = meshes["food"]
+	food.position = _center(session.food_location)
 
 
 ## Input arrives as events, so even a tap shorter than one frame is never missed.
@@ -37,6 +45,7 @@ func _process(delta: float) -> void:
 	while _clock >= TICK_SECONDS:
 		_clock -= TICK_SECONDS
 		session.tick()
+		food.position = _center(session.food_location)
 		_draw_dragon()
 	_follow(delta)
 
