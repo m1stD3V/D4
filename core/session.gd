@@ -38,9 +38,18 @@ func place_food() -> void:
 ## One step of the rules. TODO for D4: food, growth, and collisions with the dragon's
 ## own body and with solid tiles (board.is_solid). Each needs the dragon and something
 ## else, which is why they go here rather than in Dragon.tick.
+
+
 func tick() -> void:
+	var game_over := false
+	if game_over:
+		return
 	dragon.tick()
-	if dragon.body[0] == food_location:
+	var head := dragon.body[0]
+	if board.is_solid(head) or dragon.body.slice(1).has(head):
+		game_over = true
+		return
+	if head == food_location:
 		dragon.grow()
 		score += 1
 		place_food()

@@ -24,8 +24,8 @@ func test_two_quick_turns_apply_on_successive_ticks() -> void:
 	assert_eq(dragon.heading, Vector2i.LEFT)
 
 
-func test_wraps_at_the_edge() -> void:
+func test_advances_past_edge_without_wrapping() -> void:
 	var dragon := Dragon.new(Vector2i(10, 10))
 	for i in 5:
 		dragon.tick()
-	assert_eq(dragon.body[0], Vector2i(0, 5))
+	assert_eq(dragon.body[0], Vector2i(10, 5))

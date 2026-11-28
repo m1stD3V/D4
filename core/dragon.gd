@@ -34,7 +34,7 @@ func tick(growing := false) -> void:
 	if not _turns.is_empty():
 		heading = _turns.pop_front()
 	var head := body[0] + heading
-	body.push_front(Vector2i(posmod(head.x, size.x), posmod(head.y, size.y)))
+	body.push_front(head)
 
 	if not growing:
 		vacated = body.pop_back()
