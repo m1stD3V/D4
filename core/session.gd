@@ -8,6 +8,7 @@ var board: Board
 var dragon: Dragon
 var food_location: Vector2i
 var score := 0
+var game_over := false
 var _rng := RandomNumberGenerator.new()
 
 
@@ -41,7 +42,6 @@ func place_food() -> void:
 
 
 func tick() -> void:
-	var game_over := false
 	if game_over:
 		return
 	dragon.tick()
